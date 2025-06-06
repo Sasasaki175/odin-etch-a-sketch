@@ -1,2 +1,3 @@
 # odin-etch-a-sketch
-Project: Etch-a-Sketch from the Foundations Course of TOP
+This would be a browser version of something between a sketchpad and an Etch-A-Sketch.
+Creating this with the guide of The Odin Project will help me build my DOM manipulation skills.
