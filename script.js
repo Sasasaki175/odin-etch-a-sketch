@@ -1,39 +1,41 @@
 const container = document.querySelector("#container");
 const changeSizeButton = document.querySelector("#change-size-button");
 
-let size = 16;
-
-createEtchASketch(size);
+createEtchASketch(16, 16);
 
 changeSizeButton.addEventListener("click", () => {
-  let userInput = prompt("Input Etch a Sketch size 1-100", "16")
-  let etchASketchSize = Number(userInput);
-  if (etchASketchSize >= 1 && etchASketchSize <= 100 && etchASketchSize != NaN) {
+  let userInputWidth = prompt("Input Etch a Sketch width 1-100", "16");
+  let userInputHeight = prompt("Input Etch a Sketch height 1-100", "16");
+  let etchASketchWidth = Number(userInputWidth);
+  let etchASketchHeight = Number(userInputHeight);
+  if ((etchASketchWidth >= 1 && etchASketchWidth <= 100 && etchASketchWidth != NaN)
+  && (etchASketchHeight >= 1 && etchASketchHeight <= 100 && etchASketchHeight != NaN)) {
     while (container.firstChild) {
       container.firstChild.remove();
     }
-    createEtchASketch(etchASketchSize);
+    createEtchASketch(etchASketchWidth, etchASketchHeight);
   } else {
-    alert(`\"` + userInput + `\"` + " is not a valid input.");
+    alert(`\"` + userInputWidth + `\"` + " or "+ `\"` + userInputHeight + `\"` + " is not a valid input.");
   }
 });
 
-function createEtchASketch (size) {
-  for (let i = 0; i < size; i++) {
-    const gridContainer = document.createElement("div");
-    gridContainer.classList.add("grid-container");
+function createEtchASketch (width, height) {
+  for (let i = 0; i < width; i++) {
+    const gridRow = document.createElement("div");
+    gridRow.classList.add("grid-row");
+    gridRow.setAttribute("style", "flex: 1; display: flex; flex-direction: column;");
 
-    for (let i = 0; i < size; i++) {
-      const grid = document.createElement("div");
-      grid.classList.add("grid");
-      grid.setAttribute("style", "color: yellow; background: black; width: 30px; height: 30px");
-      grid.addEventListener("mouseover", () => {
-        grid.setAttribute("style", "color: red; background: white; width: 30px; height: 30px");
+    for (let i = 0; i < height; i++) {
+      const square = document.createElement("div");
+      square.classList.add("square");
+      square.setAttribute("style", "color: yellow; background: black; flex: 1;");
+      square.addEventListener("mouseover", () => {
+        square.setAttribute("style", "color: red; background: white; flex: 1;");
       });
-      gridContainer.appendChild(grid);
+      gridRow.appendChild(square);
     }
 
-    container.appendChild(gridContainer);
+    container.appendChild(gridRow);
   }
 }
 
